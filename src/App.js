@@ -3,37 +3,33 @@ import NewProject from './components/pages/NewProject';
 import About from './components/pages/About';
 import Contact from './components/pages/Contact';
 import Home from './components/pages/Home';
-import Container from './components/pages/layout/Container/Container';
+import Container from './components/layout/Container/Container';
+import NavBar from './components/layout/NavBar/NavBar';
+import Projects from './components/pages/Projects';
+import Footer from './components/layout/Footer/Footer';
 
 function App() {
   return (
     <Router>
-      <navbar>
-        <ul className="navbar">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/newproject">New Project</Link></li>
-        </ul>
+      <NavBar />
 
-      </navbar>
+      <Container customClass="minHeight">
 
-    <Container customClass="minHeight">
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/newproject" element={<NewProject />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/newproject" element={<NewProject />} />
+          <Route path="/projects" element={<Projects />} />
 
 
-      </Routes>
-    </Container>
+        </Routes>
+      </Container>
 
 
-      
 
-      <p>Footer</p>
+
+      <Footer/>
     </Router>
   )
 }

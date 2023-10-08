@@ -10,10 +10,3 @@ html, body, #root{
   height: 100%;
 }
 
-.navbar {
-  display: flex;
-  gap: 10px;
-}
-li {
-  list-style: none;
-}
