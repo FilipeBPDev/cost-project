@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NewProject from './components/pages/NewProject';
 import About from './components/pages/About';
 import Contact from './components/pages/Contact';
@@ -21,14 +21,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/newproject" element={<NewProject />} />
           <Route path="/projects" element={<Projects />} />
-
-
         </Routes>
       </Container>
-
-
-
-
       <Footer/>
     </Router>
   )

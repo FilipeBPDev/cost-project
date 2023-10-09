@@ -18,9 +18,13 @@
 .item a {
     color: #fff;
     text-decoration: none;
+    transition: 0.2s;
+    padding: 0.7em 0.5em;
+    border-radius: 15px;
 }
 
 .item a:hover {
-    
-    color: #ffbb33
+    background-color: #ffbb33 ;
+    color: black;
+
 }
