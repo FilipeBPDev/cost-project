@@ -1,4 +1,11 @@
 .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn button {
     background-color: #222;
     color: #fff;
     padding: 0.9em 1.2em;
@@ -9,6 +16,6 @@
     border-radius: 15px;
 }
 
-.btn:hover {
+.btn button:hover {
     color: #ffbb33;
 }

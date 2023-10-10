@@ -5,6 +5,7 @@
 }
 
 .formControl label {
+    margin-left: 27%;
     margin-bottom: 1.2em;
     font-weight: bold;
 }
@@ -14,7 +15,6 @@
     border-radius: 15px;
     border: none;
     background-color: #fff;
-    color: #c7c7c7;
 }
     
 
