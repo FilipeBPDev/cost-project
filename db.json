@@ -1,17 +1,5 @@
 {
-  "projects": [
-    {
-      "name": "site teste",
-      "budget": "120000",
-      "category": {
-        "id": "2",
-        "name": "Design"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 1
-    }
-  ],
+  "projects": [],
   "categories": [
     {
       "id": 1,
