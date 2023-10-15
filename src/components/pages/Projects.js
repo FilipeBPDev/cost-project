@@ -7,10 +7,12 @@ import Message from "../layout/Message/Message";
 import Container from "../layout/Container/Container";
 import LinkButton from "../layout/LinkButton/LinkButton";
 import ProjectCard from "../project/form/Card/ProjectCard";
+import Loading from "../layout/Loading/Loading";
 
 function Projects() {
 
     const [projects, setProjects] = useState([]);
+    const [removeLoading, setRemoveLoading] = useState(false);
 
 
 
@@ -21,16 +23,22 @@ function Projects() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/projects', {
-            method: 'GET',
-            headers: {
-                'Content-type': 'application/json'
-            },
-        }).then(resp => resp.json())
-            .then(data => {
-                setProjects(data)
-            })
-            .catch(err => console.log(err))
+    /*setTimeout ficticio, apenas para atrasar 2 segundos a
+    resposta do servidor, para exibição do component Loading.
+    - remover quando for subir em um servidor - */        
+        setTimeout(() => {
+            fetch('http://localhost:5000/projects', {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+            }).then(resp => resp.json())
+                .then(data => {
+                    setProjects(data)
+                    setRemoveLoading(true)
+                })
+                .catch(err => console.log(err))
+        },1000)
     }, [])
 
 
@@ -52,6 +60,10 @@ function Projects() {
                             key={project.id}
 
                         />))}
+                        {!removeLoading && <Loading/>}
+                        {removeLoading && projects.length === 0 && (
+                            <p>Não há projetos cadastrados!</p>
+                        )}
             </Container>
         </div>
     );
