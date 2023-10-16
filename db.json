@@ -1,19 +1,8 @@
 {
   "projects": [
     {
-      "name": "teste",
-      "budget": "10000",
-      "category": {
-        "id": "2",
-        "name": "Design"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 1
-    },
-    {
-      "name": "oii",
-      "budget": "988888",
+      "name": "site 3",
+      "budget": "15000",
       "category": {
         "id": "2",
         "name": "Design"
@@ -21,39 +10,6 @@
       "cost": 0,
       "services": [],
       "id": 2
-    },
-    {
-      "name": "sitefiver5",
-      "budget": "100000",
-      "category": {
-        "id": "4",
-        "name": "Planejamento"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 3
-    },
-    {
-      "name": "site novo",
-      "budget": "1200",
-      "category": {
-        "id": "3",
-        "name": "Desenvolvimento"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 4
-    },
-    {
-      "name": "teste 2",
-      "budget": "60000",
-      "category": {
-        "id": "1",
-        "name": "Infra"
-      },
-      "cost": 0,
-      "services": [],
-      "id": 5
     }
   ],
   "categories": [
