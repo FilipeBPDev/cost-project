@@ -13,7 +13,7 @@
     },
     {
       "name": "novo atualizado novo",
-      "budget": "4000",
+      "budget": "4090",
       "category": {
         "id": "1",
         "name": "Infra"
@@ -44,7 +44,6 @@
       "services": [],
       "id": 5
     }
-    
   ],
   "categories": [
     {
