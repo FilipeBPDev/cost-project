@@ -7,8 +7,21 @@
         "id": "1",
         "name": "Infra"
       },
-      "cost": 0,
-      "services": [],
+      "cost": 500,
+      "services": [
+        {
+          "name": "teste",
+          "cost": "200",
+          "description": "rrrr",
+          "id": "3fdfaef2-6d05-445f-b48b-3a00bb55c1c9"
+        },
+        {
+          "name": "teste4",
+          "cost": "300",
+          "description": "esse",
+          "id": "b7fb887d-c76c-4832-a18e-d53f0be05288"
+        }
+      ],
       "id": 2
     },
     {

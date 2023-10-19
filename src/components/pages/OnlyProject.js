@@ -1,13 +1,16 @@
 import styles from './OnlyProject.module.css';
 
-import Loading from '../layout/Loading/Loading';
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { parse, v4 as uuidv4 } from 'uuid';
+
 import Container from '../layout/Container/Container';
 import Message from '../layout/Message/Message';
-
+import Loading from '../layout/Loading/Loading';
 import ProjectForm from '../project/ProjectForm/ProjectForm';
+import ServiceForm from '../service/ServiceForm/ServiceForm';
+
 
 
 //resgata o projeto do banco baseado no parametro da url (id)
@@ -61,9 +64,44 @@ function OnlyProject() {
 
             })
             .catch(err => console.log(err))
-
     }
+    
+    function createService(project) {
+        setMessage('')
 
+        const lastService = project.services[project.services.length - 1]
+        lastService.id = uuidv4()
+        const lastServiceCost = lastService.cost;
+        
+        const newCost = parseFloat(project.cost) + parseFloat(lastServiceCost)
+
+        //validar custo do serviço
+        if(newCost > parseFloat(project.budget)) {
+            setMessage("Orçamento ultrapassado, verifique o valor do serviço")
+            setType("error")
+            //remover esse serviço do objeto do projeto
+            project.services.pop()
+            return false   
+        }
+        //adicionar custo do serviço ao custo(cost) do projeto
+        project.cost = newCost
+
+        //atualizar no project
+        fetch(`http://localhost:5000/projects/${project.id}`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(project)
+        })
+        .then(resp => resp.json())
+        .then((data) => {
+            //exibir serviços
+            console.log(data)
+        })
+
+        .catch(err => console.log(err))
+    }
     function toggleProjectForm() {
         //define que o estado será alterado para o inverso do atual
         setShowProjectForm(!showProjectForm)
@@ -119,7 +157,11 @@ function OnlyProject() {
                         </button>
                         <div className={styles.projectInfo}>
                              {showServiceForm && (
-                                <div>formulario serviço</div>
+                                <ServiceForm
+                                    handleSubmit={createService}
+                                    btnText="Adicionar serviço"
+                                    projectData={onlyProject}
+                                />
                              )}
                         </div>
                     </div>
