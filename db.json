@@ -7,7 +7,7 @@
         "id": "1",
         "name": "Infra"
       },
-      "cost": 500,
+      "cost": 4110,
       "services": [
         {
           "name": "teste",
@@ -20,6 +20,30 @@
           "cost": "300",
           "description": "esse",
           "id": "b7fb887d-c76c-4832-a18e-d53f0be05288"
+        },
+        {
+          "name": "teste",
+          "cost": "300",
+          "description": "testeteste",
+          "id": "b22ebbba-9f07-4940-982b-c8c73c15e7bc"
+        },
+        {
+          "name": "teste",
+          "cost": "300",
+          "description": "testeteste",
+          "id": "b22ebbba-9f07-4940-982b-c8c73c15e7bc"
+        },
+        {
+          "name": "hoje",
+          "cost": "3000",
+          "description": "teste",
+          "id": "74e1380f-0a11-4a3f-96b5-37143727a0ce"
+        },
+        {
+          "name": "contratar dev",
+          "cost": "10",
+          "description": "dev front end",
+          "id": "a208d64e-43f5-4c5c-ac35-c74840b8cd72"
         }
       ],
       "id": 2

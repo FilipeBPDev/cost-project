@@ -10,6 +10,8 @@ import Message from '../layout/Message/Message';
 import Loading from '../layout/Loading/Loading';
 import ProjectForm from '../project/ProjectForm/ProjectForm';
 import ServiceForm from '../service/ServiceForm/ServiceForm';
+import ServiceCard from '../service/ServiceCard/ServiceCard';
+
 
 
 
@@ -20,6 +22,8 @@ function OnlyProject() {
     const [onlyProject, setOnlyProject] = useState([]);
     const [message, setMessage] = useState()
     const [type, setType] = useState()
+    const [services, setServices] = useState([])
+
     //state responsavel por mostrar ou não o projeto
     const [showProjectForm, setShowProjectForm] = useState(false)
     const [showServiceForm, setShowServiceForm] = useState(false)
@@ -34,6 +38,7 @@ function OnlyProject() {
         }).then(resp => resp.json())
             .then((data) => {
                 setOnlyProject(data)
+                setServices(data.services)
             })
             .catch(err => console.log(err))
     }, [id])
@@ -65,43 +70,48 @@ function OnlyProject() {
             })
             .catch(err => console.log(err))
     }
-    
+
     function createService(project) {
         setMessage('')
 
         const lastService = project.services[project.services.length - 1]
         lastService.id = uuidv4()
         const lastServiceCost = lastService.cost;
-        
+
         const newCost = parseFloat(project.cost) + parseFloat(lastServiceCost)
 
         //validar custo do serviço
-        if(newCost > parseFloat(project.budget)) {
+        if (newCost > parseFloat(project.budget)) {
             setMessage("Orçamento ultrapassado, verifique o valor do serviço")
             setType("error")
             //remover esse serviço do objeto do projeto
             project.services.pop()
-            return false   
+            return false
         }
         //adicionar custo do serviço ao custo(cost) do projeto
         project.cost = newCost
 
         //atualizar no project
-        fetch(`http://localhost:5000/projects/${project.id}`,{
+        fetch(`http://localhost:5000/projects/${project.id}`, {
             method: "PATCH",
             headers: {
-                "Content-Type" : "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(project)
         })
-        .then(resp => resp.json())
-        .then((data) => {
-            //exibir serviços
-            console.log(data)
-        })
+            .then(resp => resp.json())
+            .then((data) => {
+                setShowServiceForm(false)
+                
+            })
 
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
+
+    function removeService() {
+
+    }
+
     function toggleProjectForm() {
         //define que o estado será alterado para o inverso do atual
         setShowProjectForm(!showProjectForm)
@@ -149,26 +159,42 @@ function OnlyProject() {
                         )}
                     </div>
                     <div className={styles.serviceFormContainer}>
-                            <h2>Adicione um serviço</h2>
-                            <button className={styles.btn} onClick={toggleServiceForm}>
+                        <h2>Adicione um serviço</h2>
+                        <button className={styles.btn} onClick={toggleServiceForm}>
                             {/*se não tiver a exibição do project form, ele mostra 'editar',
                              senão mostra 'fechar'*/}
                             {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}
                         </button>
                         <div className={styles.projectInfo}>
-                             {showServiceForm && (
+                            {showServiceForm && (
                                 <ServiceForm
                                     handleSubmit={createService}
                                     btnText="Adicionar serviço"
                                     projectData={onlyProject}
                                 />
-                             )}
+                            )}
                         </div>
                     </div>
                     <h2>Serviços:</h2>
-                        <Container customClass="start">
-                                <p>Itens serviços</p>
-                        </Container>
+                    <Container customClass="start">
+
+                        {services.length > 0 &&
+                        /*não usar as chaves depois da arrowfunction, pois como
+                        retorna um jsx, é necessário diretamente os parenteses()*/
+                            services.map((service) => (
+                                    <ServiceCard
+                                        id={service.id}
+                                        name={service.name}
+                                        cost={service.cost}
+                                        description={service.description}
+                                        key={service.id}
+                                        handleRemove={removeService}
+                                    />
+                                )
+                            )
+                        }
+                        {services.length === 0 && <p>não há nada aqui</p>}
+                    </Container>
                 </Container>
             </div>
         ) : (
