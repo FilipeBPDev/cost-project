@@ -108,8 +108,33 @@ function OnlyProject() {
             .catch(err => console.log(err))
     }
 
-    function removeService() {
+    function removeService(id, cost) {
+       /*faz um filtro nos serviços do projeto e deixa apenas 
+       os que tem um id diferente do serviço ser removido*/
+        const serviceUpdated = onlyProject.services.filter(
+            (service) => service.id !== id
+        )
 
+        const projectUpdated = onlyProject
+        projectUpdated.services = serviceUpdated;
+        projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
+          console.log(projectUpdated)
+        fetch(`http://localhost:5000/projects/${projectUpdated.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(projectUpdated)
+        })
+        .then(resp => resp.json())
+        .then((data) =>{
+          
+            setOnlyProject(projectUpdated) //atualiza estado do projeto no banco com o pojectUpdated
+            setServices(serviceUpdated) //atualiza o estado dos serviços com serviceUpdated
+            setMessage('Serviço removido com sucesso!')
+            setType('sucess')
+        })
+        .catch(err => console.log(err))
     }
 
     function toggleProjectForm() {
